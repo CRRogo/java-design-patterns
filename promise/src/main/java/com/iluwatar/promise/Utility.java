@@ -23,6 +23,7 @@
  * THE SOFTWARE.
  */
 package com.iluwatar.promise;
+import io.openpixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -103,7 +104,7 @@ public class Utility {
     try (var bufferedReader = new BufferedReader(new InputStreamReader(url.openStream()));
          var writer = new FileWriter(file)) {
       String line;
-      while ((line = bufferedReader.readLine()) != null) {
+      while ((line = BoundedLineReader.readLine(bufferedReader, 1000000)) != null) {
         writer.write(line);
         writer.write("\n");
       }
